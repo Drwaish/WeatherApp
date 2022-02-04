@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+     integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" 
+     crossorigin="anonymous" 
+     referrerpolicy="no-referrer" 
+     />
+   
+    
+    <style>
+ *{
+  padding: 0%;
+  margin: 0%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+
+ }
+  body{
+      background-color: wheat;
+      justify-content: center;
+      height: 100vh;
+      width: 100vh;
+      display: flex;
+      align-items: center;
+    flex-wrap: wrap;
+  }
+html,
+body{
+    height: 100%;
+    font-size: 62.5%;
+}
+html{
+    background-color: #eee;
+}
+.box{
+ height: 100%;
+ width: 40%;
+ position: absolute;
+ border-radius: 0.5rem;
+box-shadow: 0 0.2 0.3 rgba(0, 0, 0, 0.2);
+transform: translate3d(0,0,0);
+min-height: 35rem;
+min-width: 20rem;
+overflow: hidden;
+background: #a5bbdd;
+}
+.info{
+    width: 100%;
+    height:145%;
+    position: absolute;
+    z-index: 4;
+    bottom: 5;
+    top: 10%;
+}
+.location
+{
+
+    margin-top: 1.5rem;
+    text-align: center;
+
+    font-size: 3rem;
+    font-weight: 500;
+}
+.fa-street-view{
+    animation: rotate 3s linear infinite alternate;
+}
+@keyframes rotates{
+    from{
+        transform: translateX(-.5rem);
+    }
+    to{
+        transform:translateX(.5rem);
+    }
+}
+#date{
+    font-size: 2rem;
+    
+}
+.temp
+{
+    font-size: 3rem;
+    
+}
+.min_max
+{
+    font-size: 1.5rem;
+}
+    </style>
+    <title>WeatherApp</title>
+</head>
+<body>
+    <div class="box">
+    <div class="wave_one"></div>
+    <div class="wave_two"></div>
+    <div class="wave_three"></div>
+
+   <div id="weatherCon">
+       <i class="fas fa-sun" style="color: #e4d50bd7 "></i>
+   </div>
+  <div class="info">
+      
+    <h2 class="location"><i class="fas fa-street-view" style="color: #0e5ba3"></i>{%location%}, {%Country%}</h2>
+    <p id="date">WED | Sept 23 | 10:20 AM </p>
+    <h1 class="temp">{%temp%} &deg;C </h1>
+    <p class="min_max">Min {%Min_Temp%}&deg;C: Max {%Max_Temp%} &deg;C </p>
+  </div>
+</div>
+<script>
+const curDate=document.getElementById("date");
+
+let weaCon=document.getElementById("weatherCon");
+
+const tempStatus="clouds";
+
+const GetDay=()=>
+{
+    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const currentTime=new Date();
+ let day=weekday[currentTime.getDay()];
+ return day;
+};
+const GetDate=()=>
+{
+  const Mon=[
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "June",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+  ]
+    const now=new Date();
+    var month=Mon[now.getMonth()];
+    var day=now.getDate();
+    console.log(month+"/"+day);
+
+    let hours=now.getHours();
+    let min=now.getMinutes();
+    let periods="AM";
+
+    if(hours>11)
+    {
+        periods="PM";
+        if(hours>12) hours -=12;
+    }
+    if(min<10)
+    {
+        min="0"+min;
+
+    }
+return      `${month} ${day} | ${hours}:${min}${periods}`
+};
+curDate.innerHTML=GetDay() + "|" +GetDate();
+</script>
+</body>
+</html>
